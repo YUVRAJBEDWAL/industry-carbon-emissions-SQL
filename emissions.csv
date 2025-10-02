@@ -1,0 +1,52 @@
+industry,year,emissions_mtco2e
+Power Generation,2019,10250
+Power Generation,2020,9800
+Power Generation,2021,10050
+Power Generation,2022,10300
+Power Generation,2023,10550
+Manufacturing,2019,7200
+Manufacturing,2020,7000
+Manufacturing,2021,7450
+Manufacturing,2022,7600
+Manufacturing,2023,7900
+Transportation,2019,6800
+Transportation,2020,6500
+Transportation,2021,6900
+Transportation,2022,7100
+Transportation,2023,7400
+Agriculture,2019,3200
+Agriculture,2020,3100
+Agriculture,2021,3150
+Agriculture,2022,3250
+Agriculture,2023,3300
+Construction,2019,2100
+Construction,2020,2000
+Construction,2021,2050
+Construction,2022,2150
+Construction,2023,2200
+Oil & Gas,2019,9000
+Oil & Gas,2020,8800
+Oil & Gas,2021,9100
+Oil & Gas,2022,9300
+Oil & Gas,2023,9500
+Mining,2019,2600
+Mining,2020,2550
+Mining,2021,2700
+Mining,2022,2750
+Mining,2023,2800
+Waste Management,2019,1500
+Waste Management,2020,1450
+Waste Management,2021,1550
+Waste Management,2022,1600
+Waste Management,2023,1650
+Residential,2019,3400
+Residential,2020,3300
+Residential,2021,3450
+Residential,2022,3500
+Residential,2023,3550
+Commercial,2019,2900
+Commercial,2020,2850
+Commercial,2021,2950
+Commercial,2022,3000
+Commercial,2023,3050
+

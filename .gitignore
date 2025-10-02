@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# SQLite databases
+*.db
+*.sqlite
+
+# Data/outputs
+top5_emissions.png
+
+# macOS
+.DS_Store
+
