@@ -9,6 +9,7 @@ import seaborn as sns
 PROJECT_DIR = Path(__file__).parent
 CSV_PATH = PROJECT_DIR / "emissions.csv"
 DB_PATH = PROJECT_DIR / "emissions.db"
+DOCS_DIR = PROJECT_DIR / "docs"
 
 
 def initialize_database_with_csv(csv_path: Path, db_path: Path) -> None:
@@ -108,6 +109,71 @@ def plot_top5_bar(top5_df: pd.DataFrame, output_path: Path) -> None:
     # plt.show()
 
 
+def write_static_report(most_recent_year: int, totals_df: pd.DataFrame, top5_df: pd.DataFrame, output_dir: Path) -> Path:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    chart_path = output_dir / "top5_emissions.png"
+    plot_top5_bar(top5_df, chart_path)
+
+    totals_table_html = totals_df.to_html(index=False, classes="table", border=0)
+    top5_table_html = top5_df.to_html(index=False, classes="table", border=0)
+
+    html = f"""
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+  <meta charset=\"utf-8\" />
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+  <title>Analyzing Industry Carbon Emissions</title>
+  <style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif; margin: 24px; color: #111; }}
+    h1, h2 {{ margin: 0 0 12px; }}
+    .muted {{ color: #555; }}
+    .container {{ max-width: 960px; margin: 0 auto; }}
+    .card {{ background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }}
+    .table {{ border-collapse: collapse; width: 100%; }}
+    .table th, .table td {{ text-align: left; padding: 8px 10px; border-bottom: 1px solid #eee; }}
+    img {{ max-width: 100%; height: auto; border: 1px solid #eee; border-radius: 8px; }}
+    code {{ background: #f6f8fa; padding: 2px 6px; border-radius: 6px; }}
+  </style>
+  <meta name=\"description\" content=\"SQLite + Python analysis of industry-level carbon emissions.\" />
+  <meta name=\"robots\" content=\"index,follow\" />
+  <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>\" />
+  
+</head>
+<body>
+  <div class=\"container\">
+    <h1>Analyzing Industry Carbon Emissions</h1>
+    <p class=\"muted\">Most recent year: <strong>{most_recent_year}</strong></p>
+
+    <div class=\"card\">
+      <h2>Top 5 Highest Emitting Industries</h2>
+      <p class=\"muted\">Based on total MtCOe in the most recent year.</p>
+      <img src=\"top5_emissions.png\" alt=\"Top 5 emissions chart\" />
+      {top5_table_html}
+    </div>
+
+    <div class=\"card\">
+      <h2>Totals by Industry ({most_recent_year})</h2>
+      {totals_table_html}
+    </div>
+
+    <div class=\"card\">
+      <h2>Reproduce Locally</h2>
+      <pre><code>python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python app.py</code></pre>
+    </div>
+  </div>
+</body>
+</html>
+"""
+
+    index_path = output_dir / "index.html"
+    index_path.write_text(html, encoding="utf-8")
+    return index_path
+
+
 def main() -> None:
     if not CSV_PATH.exists():
         raise FileNotFoundError(f"CSV not found at {CSV_PATH}")
@@ -127,9 +193,9 @@ def main() -> None:
         print("\nTop 5 highest emitting industries:")
         print(top5_df.to_string(index=False))
 
-        output_chart = PROJECT_DIR / "top5_emissions.png"
-        plot_top5_bar(top5_df, output_chart)
-        print(f"\nSaved bar chart to: {output_chart}")
+        # Write GitHub Pages-friendly static report under docs/
+        report_index = write_static_report(most_recent_year, totals_df, top5_df, DOCS_DIR)
+        print(f"\nSaved GitHub Pages report to: {report_index}")
     finally:
         connection.close()
 

@@ -16,7 +16,8 @@ venv.bak/
 *.sqlite
 
 # Data/outputs
-top5_emissions.png
+# Keep docs/ outputs tracked for GitHub Pages
+!docs/
 
 # macOS
 .DS_Store

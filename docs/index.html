@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Analyzing Industry Carbon Emissions</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif; margin: 24px; color: #111; }
+    h1, h2 { margin: 0 0 12px; }
+    .muted { color: #555; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .card { background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+    .table { border-collapse: collapse; width: 100%; }
+    .table th, .table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #eee; }
+    img { max-width: 100%; height: auto; border: 1px solid #eee; border-radius: 8px; }
+    code { background: #f6f8fa; padding: 2px 6px; border-radius: 6px; }
+  </style>
+  <meta name="description" content="SQLite + Python analysis of industry-level carbon emissions." />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>" />
+  
+</head>
+<body>
+  <div class="container">
+    <h1>Analyzing Industry Carbon Emissions</h1>
+    <p class="muted">Most recent year: <strong>2023</strong></p>
+
+    <div class="card">
+      <h2>Top 5 Highest Emitting Industries</h2>
+      <p class="muted">Based on total MtCOe in the most recent year.</p>
+      <img src="top5_emissions.png" alt="Top 5 emissions chart" />
+      <table class="dataframe table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>industry</th>
+      <th>total_emissions</th>
+      <th>emissions_rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Power Generation</td>
+      <td>10550.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Oil &amp; Gas</td>
+      <td>9500.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Manufacturing</td>
+      <td>7900.0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Transportation</td>
+      <td>7400.0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Residential</td>
+      <td>3550.0</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+    <div class="card">
+      <h2>Totals by Industry (2023)</h2>
+      <table class="dataframe table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>industry</th>
+      <th>total_emissions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Power Generation</td>
+      <td>10550.0</td>
+    </tr>
+    <tr>
+      <td>Oil &amp; Gas</td>
+      <td>9500.0</td>
+    </tr>
+    <tr>
+      <td>Manufacturing</td>
+      <td>7900.0</td>
+    </tr>
+    <tr>
+      <td>Transportation</td>
+      <td>7400.0</td>
+    </tr>
+    <tr>
+      <td>Residential</td>
+      <td>3550.0</td>
+    </tr>
+    <tr>
+      <td>Agriculture</td>
+      <td>3300.0</td>
+    </tr>
+    <tr>
+      <td>Commercial</td>
+      <td>3050.0</td>
+    </tr>
+    <tr>
+      <td>Mining</td>
+      <td>2800.0</td>
+    </tr>
+    <tr>
+      <td>Construction</td>
+      <td>2200.0</td>
+    </tr>
+    <tr>
+      <td>Waste Management</td>
+      <td>1650.0</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+    <div class="card">
+      <h2>Reproduce Locally</h2>
+      <pre><code>python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python app.py</code></pre>
+    </div>
+  </div>
+</body>
+</html>
