@@ -74,3 +74,4 @@ Run the project to see exact numbers and the chart.
 - The SQL uses window functions available in modern SQLite versions (3.25+). macOS default SQLite should be sufficient.
 
 
+# industry-carbon-emissions-SQL
